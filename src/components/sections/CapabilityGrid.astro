@@ -12,14 +12,20 @@ const { items } = Astro.props;
 ---
 
 <section class="section-block">
-  <div class="section-heading">
-    <p class="section-kicker">Capabilities</p>
-    <h2>围绕研究与执行构建模块化能力</h2>
+  <div class="section-heading capability-heading">
+    <div>
+      <p class="section-kicker">Capabilities</p>
+      <h2>围绕研究与执行构建模块化能力</h2>
+    </div>
+    <p class="capability-heading__note">
+      不是服务目录，而是一组持续协同的研究与系统模块。
+    </p>
   </div>
   <div class="capability-grid">
     {
-      items.map((item) => (
+      items.map((item, index) => (
         <article class="capability-card">
+          <span class="capability-card__index">{String(index + 1).padStart(2, "0")}</span>
           <p class="capability-card__title">{item.name}</p>
           <p class="capability-card__description">{item.description}</p>
         </article>
@@ -37,6 +43,12 @@ const { items } = Astro.props;
     margin-bottom: 24px;
   }
 
+  .capability-heading {
+    display: grid;
+    gap: 16px;
+    align-items: end;
+  }
+
   .section-kicker {
     margin: 0 0 8px;
     color: var(--color-accent);
@@ -51,6 +63,13 @@ const { items } = Astro.props;
     line-height: 1.1;
   }
 
+  .capability-heading__note {
+    margin: 0;
+    max-width: 28rem;
+    color: var(--color-muted);
+    line-height: 1.75;
+  }
+
   .capability-grid {
     display: grid;
     gap: 16px;
@@ -58,16 +77,29 @@ const { items } = Astro.props;
   }
 
   .capability-card {
+    position: relative;
     padding: 24px;
     border: 1px solid var(--border-subtle);
     border-radius: 24px;
-    background: var(--color-panel);
+    background:
+      linear-gradient(180deg, rgba(61, 210, 255, 0.05), rgba(61, 210, 255, 0)),
+      var(--color-panel);
     box-shadow: var(--shadow-panel);
   }
 
+  .capability-card__index,
   .capability-card__title,
   .capability-card__description {
     margin: 0;
+  }
+
+  .capability-card__index {
+    display: inline-flex;
+    margin-bottom: 18px;
+    color: var(--color-accent);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
   }
 
   .capability-card__title {
@@ -80,5 +112,11 @@ const { items } = Astro.props;
     margin-top: 12px;
     color: var(--color-muted);
     line-height: 1.75;
+  }
+
+  @media (min-width: 960px) {
+    .capability-heading {
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 0.4fr);
+    }
   }
 </style>

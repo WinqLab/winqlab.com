@@ -5,30 +5,74 @@ interface Props {
   steps: string[];
 }
 
+const stepNotes: Record<string, string> = {
+  问题定义: "界定研究对象、约束与要回答的核心问题。",
+  假设提出: "把观察转成可验证的研究假设与实验方向。",
+  数据构建: "围绕假设组织输入、清洗逻辑与特征表达。",
+  实验验证: "在统一框架中检验假设是否成立，并保留实验上下文。",
+  结果审查: "复核结果、识别偏差来源并判断是否可继续推进。",
+  持续迭代: "将反馈重新注入研究流程，形成长期演进的闭环。",
+};
+
+const stepTags: Record<string, string> = {
+  问题定义: "scope",
+  假设提出: "hypothesis",
+  数据构建: "data",
+  实验验证: "validation",
+  结果审查: "review",
+  持续迭代: "iteration",
+};
+
 const { title, description, steps } = Astro.props;
 ---
 
 <section class="section-block methodology-section" id="methodology">
-  <div class="section-heading">
-    <p class="section-kicker">Methodology</p>
-    <h2>{title}</h2>
-    <p class="section-description">{description}</p>
+  <div class="methodology-layout">
+    <div class="section-heading methodology-rail">
+      <p class="section-kicker">Methodology</p>
+      <h2>{title}</h2>
+      <p class="section-description">{description}</p>
+      <div class="methodology-rail__legend">
+        <span>Research Loop</span>
+        <span>Structured Review</span>
+        <span>System-first</span>
+      </div>
+    </div>
+    <ol class="methodology-grid">
+      {
+        steps.map((step, index) => (
+          <li class="methodology-step">
+            <div class="methodology-step__meta">
+              <span class="methodology-step__index">{String(index + 1).padStart(2, "0")}</span>
+              <span class="methodology-step__tag">{stepTags[step]}</span>
+            </div>
+            <span class="methodology-step__label">{step}</span>
+            <p class="methodology-step__note">{stepNotes[step]}</p>
+          </li>
+        ))
+      }
+    </ol>
   </div>
-  <ol class="methodology-grid">
-    {
-      steps.map((step, index) => (
-        <li class="methodology-step">
-          <span class="methodology-step__index">{String(index + 1).padStart(2, "0")}</span>
-          <span class="methodology-step__label">{step}</span>
-        </li>
-      ))
-    }
-  </ol>
 </section>
 
 <style>
   .section-block {
     padding: 36px 0;
+  }
+
+  .methodology-layout {
+    display: grid;
+    gap: 20px;
+  }
+
+  .methodology-rail {
+    padding: 22px;
+    border: 1px solid var(--border-subtle);
+    border-radius: 28px;
+    background:
+      linear-gradient(180deg, rgba(61, 210, 255, 0.04), rgba(61, 210, 255, 0)),
+      var(--color-panel-soft);
+    box-shadow: var(--shadow-glow);
   }
 
   .section-kicker {
@@ -52,23 +96,50 @@ const { title, description, steps } = Astro.props;
     line-height: 1.8;
   }
 
+  .methodology-rail__legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .methodology-rail__legend span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 0 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    color: var(--color-muted);
+    font-size: 0.74rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
   .methodology-grid {
     list-style: none;
     padding: 0;
-    margin: 24px 0 0;
+    margin: 0;
     display: grid;
     gap: 14px;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 
   .methodology-step {
     display: grid;
-    gap: 12px;
-    min-height: 150px;
+    gap: 14px;
+    min-height: 180px;
     padding: 22px;
     border-radius: 24px;
     background: linear-gradient(180deg, rgba(14, 24, 35, 0.92), rgba(8, 16, 25, 0.86));
     border: 1px solid var(--border-subtle);
+  }
+
+  .methodology-step__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
   }
 
   .methodology-step__index {
@@ -77,8 +148,33 @@ const { title, description, steps } = Astro.props;
     letter-spacing: 0.14em;
   }
 
+  .methodology-step__tag {
+    color: var(--color-muted);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
   .methodology-step__label {
     font-size: 1.1rem;
     line-height: 1.45;
+  }
+
+  .methodology-step__note {
+    margin: 0;
+    color: var(--color-muted);
+    line-height: 1.75;
+  }
+
+  @media (min-width: 980px) {
+    .methodology-layout {
+      grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.28fr);
+      align-items: start;
+    }
+
+    .methodology-rail {
+      position: sticky;
+      top: 104px;
+    }
   }
 </style>

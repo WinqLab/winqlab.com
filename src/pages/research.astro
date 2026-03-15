@@ -1,21 +1,31 @@
 ---
+import PageHero from "../components/PageHero.astro";
 import { researchPage } from "../data/research";
 import SiteLayout from "../layouts/SiteLayout.astro";
+
+const researchMeta = [
+  { label: "Mode", value: "Research Principles" },
+  { label: "Flow", value: "Question -> Validation -> Iteration" },
+  { label: "Scope", value: "Themes / Process / Future Directions" },
+];
 ---
 
 <SiteLayout title={`WinqLab | ${researchPage.title}`}>
-  <section class="content-hero">
-    <p class="content-kicker">Research</p>
-    <h1>{researchPage.title}</h1>
-    <p class="content-intro">{researchPage.intro}</p>
-  </section>
+  <PageHero
+    kicker="Research"
+    title={researchPage.title}
+    intro={researchPage.intro}
+    signals={["Process-first", "Peer-facing", "Methodology"]}
+    meta={researchMeta}
+  />
 
-  <div class="content-grid">
+  <div class="page-grid page-grid--research">
     {
-      researchPage.sections.map((section) => (
-        <section class="content-panel">
-          <h2>{section.title}</h2>
-          <ul>
+      researchPage.sections.map((section, index) => (
+        <section class="page-card">
+          <span class="page-card__index">{String(index + 1).padStart(2, "0")}</span>
+          <h2 class="page-card__title">{section.title}</h2>
+          <ul class="page-list">
             {section.items.map((item) => <li>{item}</li>)}
           </ul>
         </section>
@@ -25,61 +35,8 @@ import SiteLayout from "../layouts/SiteLayout.astro";
 </SiteLayout>
 
 <style>
-  .content-hero {
-    padding: 80px 0 32px;
-  }
-
-  .content-kicker {
-    margin: 0 0 8px;
-    color: var(--color-accent);
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    font-size: 0.74rem;
-  }
-
-  h1 {
-    margin: 0;
-    font-size: clamp(2.6rem, 5vw, 4.4rem);
-    line-height: 1.02;
-  }
-
-  .content-intro {
-    margin: 20px 0 0;
-    max-width: 50rem;
-    color: var(--color-muted);
-    line-height: 1.8;
-  }
-
-  .content-grid {
-    display: grid;
-    gap: 16px;
-    padding-bottom: 48px;
-  }
-
-  .content-panel {
-    padding: 24px;
-    border-radius: 24px;
-    border: 1px solid var(--border-subtle);
-    background: var(--color-panel);
-  }
-
-  h2 {
-    margin: 0 0 16px;
-    font-size: 1.5rem;
-  }
-
-  ul {
-    margin: 0;
-    padding-left: 1.25rem;
-    color: var(--color-muted);
-  }
-
-  li + li {
-    margin-top: 12px;
-  }
-
   @media (min-width: 960px) {
-    .content-grid {
+    .page-grid--research {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }

@@ -8,7 +8,7 @@ const { title, description } = Astro.props;
 ---
 
 <section class="contact-close">
-  <div>
+  <div class="contact-close__title-block">
     <p class="contact-close__kicker">Contact</p>
     <h2>{title}</h2>
   </div>
@@ -17,9 +17,13 @@ const { title, description } = Astro.props;
 
 <style>
   .contact-close {
-    margin: 36px 0 12px;
-    padding: 28px 0 0;
-    border-top: 1px solid var(--border-subtle);
+    margin: 40px 0 12px;
+    padding: 28px 24px;
+    border: 1px solid var(--border-subtle);
+    border-radius: 28px;
+    background:
+      linear-gradient(180deg, rgba(61, 210, 255, 0.04), rgba(61, 210, 255, 0)),
+      var(--color-panel-soft);
     display: grid;
     gap: 16px;
   }

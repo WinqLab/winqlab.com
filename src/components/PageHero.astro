@@ -1,0 +1,52 @@
+---
+interface MetaItem {
+  label: string;
+  value: string;
+}
+
+interface Props {
+  kicker: string;
+  title: string;
+  intro: string;
+  summary?: string;
+  signals?: string[];
+  meta?: MetaItem[];
+}
+
+const {
+  kicker,
+  title,
+  intro,
+  summary,
+  signals = [],
+  meta = [],
+} = Astro.props;
+---
+
+<section class="page-hero">
+  {signals.length > 0 && (
+    <div class="page-status">
+      {signals.map((signal) => <span class="page-status__item">{signal}</span>)}
+    </div>
+  )}
+
+  <div class="page-surface">
+    <div class="page-surface__copy">
+      <p class="page-kicker">{kicker}</p>
+      <h1>{title}</h1>
+      <p class="page-intro">{intro}</p>
+      {summary && <p class="page-summary">{summary}</p>}
+    </div>
+
+    {meta.length > 0 && (
+      <div class="page-meta">
+        {meta.map((item) => (
+          <article class="page-meta__item">
+            <span class="page-meta__label">{item.label}</span>
+            <p class="page-meta__value">{item.value}</p>
+          </article>
+        ))}
+      </div>
+    )}
+  </div>
+</section>
