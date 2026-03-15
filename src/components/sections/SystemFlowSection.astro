@@ -3,7 +3,68 @@ interface Props {
   items: string[];
 }
 
+const nodeMeta = {
+  市场数据: {
+    phase: "发现",
+    displayLabel: "市场数据",
+    featured: true,
+  },
+  数据处理: {
+    phase: "整理",
+    displayLabel: "数据处理",
+    featured: false,
+  },
+  "特征 / 信号": {
+    phase: "表达",
+    displayLabel: "特征信号",
+    featured: false,
+  },
+  策略实验: {
+    phase: "实验",
+    displayLabel: "策略实验",
+    featured: true,
+  },
+  回测评估: {
+    phase: "验证",
+    displayLabel: "回测评估",
+    featured: false,
+  },
+  执行接口: {
+    phase: "落地",
+    displayLabel: "执行接口",
+    featured: true,
+  },
+  监控与复盘: {
+    phase: "反馈",
+    displayLabel: "监控复盘",
+    featured: false,
+  },
+} as const;
+
+const resultCards = [
+  {
+    range: "01-02",
+    title: "发现机会",
+    description: "从市场噪声里筛出值得定义的问题，并整理成可持续研究的输入。",
+  },
+  {
+    range: "03-05",
+    title: "验证假设",
+    description: "把信号表达、策略实验与回测评估串成一条验证链，过滤脆弱结论。",
+  },
+  {
+    range: "06-07",
+    title: "落地执行 / 持续复盘",
+    description: "让研究结果进入执行端，并把监控反馈重新送回系统，形成闭环。",
+  },
+];
+
 const { items } = Astro.props;
+const nodes = items.map((label, index) => ({
+  label,
+  index: String(index + 1).padStart(2, "0"),
+  ...nodeMeta[label as keyof typeof nodeMeta],
+}));
 ---
 
 <section class="section-block" id="system-flow">
@@ -16,22 +77,35 @@ const { items } = Astro.props;
   </div>
   <div class="system-console">
     <div class="system-console__header">
-      <span class="system-console__title">研究链路总览</span>
-      <div class="system-console__modes">
-        <span>关键环节</span>
-        <span>执行衔接</span>
+      <div class="system-console__heading">
+        <span class="system-console__title">研究链路总览</span>
+        <p class="system-console__summary">以业务结果为导向，把发现、验证、落地与反馈压进同一条研究面板。</p>
       </div>
+      <p class="system-console__rail">机会识别 -> 假设验证 -> 执行反馈</p>
     </div>
-    <div class="system-flow">
+
+    <div class="system-pipeline" aria-label="研究系统流程">
       {
-        items.map((item, index) => (
-          <>
-            <article class="system-node">
-              <span class="system-node__index">{String(index + 1).padStart(2, "0")}</span>
-              <p class="system-node__label">{item}</p>
-            </article>
-            {index < items.length - 1 && <span class="system-flow__arrow">→</span>}
-          </>
+        nodes.map((node) => (
+          <article class:list={["system-node", node.featured && "system-node--featured"]}>
+            <div class="system-node__top">
+              <span class="system-node__index">{node.index}</span>
+              <span class="system-node__phase">{node.phase}</span>
+            </div>
+            <p class="system-node__label">{node.displayLabel}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="system-results" aria-label="业务结果摘要">
+      {
+        resultCards.map((card) => (
+          <article class="system-result-card">
+            <span class="system-result-card__range">{card.range}</span>
+            <p class="system-result-card__title">{card.title}</p>
+            <p class="system-result-card__description">{card.description}</p>
+          </article>
         ))
       }
     </div>
@@ -68,15 +142,10 @@ const { items } = Astro.props;
     line-height: 1.8;
   }
 
-  .system-flow {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 14px;
-  }
-
   .system-console {
-    padding: 18px;
+    display: grid;
+    gap: 22px;
+    padding: 20px;
     border-radius: 28px;
     border: 1px solid var(--border-subtle);
     background:
@@ -86,14 +155,15 @@ const { items } = Astro.props;
   }
 
   .system-console__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
-    padding-bottom: 16px;
-    margin-bottom: 18px;
+    display: grid;
+    gap: 14px;
+    padding-bottom: 18px;
     border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+  }
+
+  .system-console__heading {
+    display: grid;
+    gap: 10px;
   }
 
   .system-console__title {
@@ -103,52 +173,205 @@ const { items } = Astro.props;
     text-transform: uppercase;
   }
 
-  .system-console__modes {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+  .system-console__summary,
+  .system-console__rail {
+    margin: 0;
   }
 
-  .system-console__modes span {
+  .system-console__summary {
+    max-width: 44rem;
+    color: var(--color-muted);
+    line-height: 1.7;
+  }
+
+  .system-console__rail {
     display: inline-flex;
     align-items: center;
-    min-height: 32px;
-    padding: 0 12px;
+    width: fit-content;
+    min-height: 34px;
+    padding: 0 14px;
     border-radius: 999px;
     border: 1px solid rgba(148, 163, 184, 0.16);
-    color: var(--color-muted);
-    font-size: 0.74rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    color: var(--color-text);
+    background: rgba(255, 255, 255, 0.02);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+  }
+
+  .system-pipeline {
+    display: grid;
+    gap: 10px;
+    position: relative;
+    padding-bottom: 18px;
   }
 
   .system-node {
-    min-width: 150px;
-    flex: 1 1 150px;
-    padding: 20px;
+    min-width: 0;
+    position: relative;
+    padding: 16px 16px 18px;
     border-radius: 20px;
     border: 1px solid rgba(148, 163, 184, 0.14);
-    background: rgba(255, 255, 255, 0.02);
+    background:
+      linear-gradient(180deg, rgba(61, 210, 255, 0.06), rgba(61, 210, 255, 0)),
+      rgba(255, 255, 255, 0.02);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.02),
+      0 0 0 1px rgba(61, 210, 255, 0.02);
+  }
+
+  .system-node::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    background: var(--color-accent);
+    box-shadow: 0 0 0 5px rgba(61, 210, 255, 0.12);
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+
+  .system-node--featured {
+    background:
+      linear-gradient(180deg, rgba(61, 210, 255, 0.14), rgba(61, 210, 255, 0.01)),
+      rgba(255, 255, 255, 0.03);
+    border-color: rgba(61, 210, 255, 0.28);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.04),
+      inset 0 3px 0 rgba(61, 210, 255, 0.24),
+      0 18px 44px rgba(3, 10, 18, 0.22);
+  }
+
+  .system-node__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
   }
 
   .system-node__index,
-  .system-node__label {
+  .system-node__label,
+  .system-result-card__title,
+  .system-result-card__description {
     margin: 0;
   }
 
   .system-node__index {
-    display: inline-block;
     color: var(--color-accent);
     font-size: 0.74rem;
     letter-spacing: 0.14em;
-    margin-bottom: 14px;
+  }
+
+  .system-node__phase {
+    display: inline-flex;
+    align-items: center;
+    min-height: 26px;
+    padding: 0 10px;
+    border-radius: 999px;
+    background: rgba(61, 210, 255, 0.08);
+    color: var(--color-accent-strong);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
 
   .system-node__label {
-    line-height: 1.55;
+    margin-top: 16px;
+    font-size: 1.02rem;
+    line-height: 1.35;
   }
 
-  .system-flow__arrow {
+  .system-node--featured .system-node__label {
+    color: #f2f8ff;
+  }
+
+  .system-node--featured .system-node__phase {
+    background: rgba(61, 210, 255, 0.14);
+    color: #b7efff;
+  }
+
+  .system-results {
+    display: grid;
+    gap: 12px;
+    padding-top: 2px;
+  }
+
+  .system-result-card {
+    padding: 16px 18px;
+    border-radius: 20px;
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    background: rgba(255, 255, 255, 0.018);
+  }
+
+  .system-result-card__range {
+    display: inline-flex;
     color: var(--color-accent);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+  }
+
+  .system-result-card__title {
+    margin-top: 12px;
+    font-size: 1rem;
+    line-height: 1.35;
+  }
+
+  .system-result-card__description {
+    margin-top: 10px;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    line-height: 1.68;
+  }
+
+  @media (min-width: 720px) {
+    .system-console {
+      padding: 24px;
+    }
+
+    .system-results {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1080px) {
+    .system-console {
+      gap: 24px;
+      padding: 24px 28px 28px;
+    }
+
+    .system-console__header {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+      gap: 18px;
+    }
+
+    .system-pipeline {
+      grid-template-columns: 1.1fr 0.9fr 0.92fr 1.1fr 0.92fr 1.08fr 0.9fr;
+      gap: 12px;
+      align-items: stretch;
+      padding-bottom: 22px;
+    }
+
+    .system-pipeline::before {
+      content: "";
+      position: absolute;
+      left: 7%;
+      right: 7%;
+      bottom: 6px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(61, 210, 255, 0.2), rgba(61, 210, 255, 0.52));
+      opacity: 0.88;
+    }
+
+    .system-node {
+      min-height: 114px;
+      z-index: 1;
+    }
+
+    .system-node--featured {
+      min-height: 114px;
+    }
   }
 </style>

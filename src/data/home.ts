@@ -66,7 +66,7 @@ export const homePage = {
     tracks: ["研究方法", "系统设计", "实验记录"],
   },
   contact: {
-    title: "保持连接",
+    title: "保持联系",
     description:
       "如果你关注量化研究、系统设计或相关协作议题，欢迎建立联系。",
   },
