@@ -11,45 +11,31 @@ interface Props {
   actions: Action[];
 }
 
-const heroSignals = [
-  "Static Interface",
-  "Research-first",
-  "No Public PnL",
-];
-
-const heroPanels = [
-  { label: "Mode", value: "Research / System" },
-  { label: "Output", value: "Methods / Notes / Structure" },
-  { label: "Surface", value: "Data -> Validation -> Execution" },
-];
-
-const surfaceModules = [
-  "Research",
-  "Data",
-  "Backtesting",
-  "Execution",
-  "Infrastructure",
-];
-
-const terminalLines = [
-  "hypothesis.define()",
-  "dataset.align()",
-  "signal.review()",
-  "execution.observe()",
+const surfaceRows = [
+  { label: "系统路径", value: "研究假设 -> 系统验证 -> 实盘交易" },
+  { label: "核心原则", value: "可迭代、可审查、可扩展" },
+  { label: "当前焦点", value: "方法框架、执行效率、系统工程" },
 ];
 
 const { title, description, supporting, actions } = Astro.props;
+
+const titleLines = (() => {
+  const marker = "，再到";
+  if (!title.includes(marker)) return [title];
+
+  const [lead, tail] = title.split(marker);
+  return [lead, `再到${tail}`];
+})();
 ---
 
 <section class="hero-section">
   <div class="hero-copy">
-    <div class="hero-status">
-      {
-        heroSignals.map((signal) => <span class="hero-status__item">{signal}</span>)
-      }
-    </div>
-    <p class="hero-kicker">Quant Research Lab</p>
-    <h1>{title}</h1>
+    <p class="hero-kicker">研究与交易系统</p>
+    <h1>
+      {titleLines.map((line) => (
+        <span>{line}</span>
+      ))}
+    </h1>
     <p class="hero-description">{description}</p>
     <p class="hero-supporting">{supporting}</p>
     <div class="hero-actions">
@@ -67,121 +53,74 @@ const { title, description, supporting, actions } = Astro.props;
         ))
       }
     </div>
-    <div class="hero-ledger">
-      {
-        heroPanels.map((panel) => (
-          <article class="hero-ledger__item">
-            <span class="hero-ledger__label">{panel.label}</span>
-            <p class="hero-ledger__value">{panel.value}</p>
-          </article>
-        ))
-      }
-    </div>
   </div>
-  <div class="hero-surface" aria-hidden="true">
-    <div class="hero-surface__chrome">
-      <div class="hero-surface__lights">
-        <span></span>
-        <span></span>
-        <span></span>
+  <aside class="hero-surface">
+    <article class="hero-surface__card">
+      <span class="hero-surface__eyebrow">系统概览</span>
+      <p class="hero-surface__title">研究到交易</p>
+      <p class="hero-surface__summary">把研究、验证与执行放进同一套长期演进的系统结构。</p>
+      <div class="hero-surface__rows">
+        {
+          surfaceRows.map((row) => (
+            <div class="hero-surface__row">
+              <span class="hero-surface__row-label">{row.label}</span>
+              <p class="hero-surface__row-value">{row.value}</p>
+            </div>
+          ))
+        }
       </div>
-      <p class="hero-surface__title">WinqLab Research Surface</p>
-    </div>
-    <div class="hero-surface__grid">
-      <article class="hero-surface__panel hero-surface__panel--pipeline">
-        <span class="hero-surface__label">Pipeline</span>
-        <p class="hero-surface__headline">Research -> Validation -> Execution</p>
-        <div class="hero-surface__rail">
-          {
-            surfaceModules.map((module) => (
-              <span class="hero-surface__chip">{module}</span>
-            ))
-          }
-        </div>
-      </article>
-      <article class="hero-surface__panel hero-surface__panel--matrix">
-        <span class="hero-surface__label">Modules</span>
-        <div class="hero-surface__matrix">
-          {
-            surfaceModules.map((module) => (
-              <span class="hero-surface__module">{module}</span>
-            ))
-          }
-        </div>
-      </article>
-      <article class="hero-surface__panel hero-surface__panel--terminal">
-        <span class="hero-surface__label">Trace</span>
-        <div class="hero-surface__terminal">
-          {
-            terminalLines.map((line) => (
-              <p class="hero-surface__terminal-line">{line}</p>
-            ))
-          }
-        </div>
-      </article>
-    </div>
-  </div>
+    </article>
+  </aside>
 </section>
 
 <style>
   .hero-section {
-    padding: 88px 0 72px;
+    padding: clamp(44px, 5.2vw, 76px) 0 68px;
     display: grid;
-    gap: 34px;
+    gap: 48px;
     align-items: start;
   }
 
-  .hero-status {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 22px;
-  }
-
-  .hero-status__item {
-    display: inline-flex;
-    align-items: center;
-    min-height: 34px;
-    padding: 0 12px;
-    border-radius: 999px;
-    border: 1px solid rgba(148, 163, 184, 0.18);
-    background: rgba(255, 255, 255, 0.02);
-    color: var(--color-muted);
-    font-size: 0.74rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+  .hero-copy {
+    max-width: 44rem;
   }
 
   .hero-kicker {
-    margin: 0 0 16px;
+    margin: 0 0 20px;
     color: var(--color-accent);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    font-size: 0.76rem;
   }
 
   h1 {
+    display: grid;
+    gap: 0.18em;
     margin: 0;
-    max-width: 12ch;
-    font-size: clamp(2.8rem, 7vw, 5.6rem);
+    width: fit-content;
+    font-size: clamp(2.8rem, 4.9vw, 4.05rem);
     line-height: 0.98;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.06em;
+  }
+
+  h1 span {
+    display: block;
+    white-space: nowrap;
   }
 
   .hero-description,
   .hero-supporting {
-    max-width: 52rem;
-    font-size: 1.05rem;
-    line-height: 1.8;
+    max-width: 31rem;
+    font-size: 1rem;
+    line-height: 1.95;
   }
 
   .hero-description {
-    margin: 24px 0 0;
+    margin: 30px 0 0;
     color: var(--color-text);
   }
 
   .hero-supporting {
-    margin: 12px 0 0;
+    margin: 16px 0 0;
     color: var(--color-muted);
   }
 
@@ -189,7 +128,7 @@ const { title, description, supporting, actions } = Astro.props;
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
-    margin-top: 30px;
+    margin-top: 34px;
   }
 
   .hero-action {
@@ -213,230 +152,145 @@ const { title, description, supporting, actions } = Astro.props;
 
   .hero-action--primary {
     background: linear-gradient(135deg, var(--color-accent-soft), rgba(61, 210, 255, 0.08));
-    border-color: rgba(61, 210, 255, 0.4);
+    border-color: rgba(61, 210, 255, 0.38);
   }
 
   .hero-action--secondary {
     color: var(--color-muted);
   }
 
-  .hero-ledger {
-    display: grid;
-    gap: 14px;
-    margin-top: 30px;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  }
-
-  .hero-ledger__item {
-    min-height: 132px;
-    padding: 18px 18px 20px;
-    border-radius: 22px;
-    border: 1px solid var(--border-subtle);
-    background: linear-gradient(180deg, rgba(18, 31, 45, 0.84), rgba(8, 16, 25, 0.82));
-    box-shadow: var(--shadow-panel);
-  }
-
-  .hero-ledger__label,
-  .hero-ledger__value {
-    margin: 0;
-  }
-
-  .hero-ledger__label {
-    color: var(--color-accent);
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
-
-  .hero-ledger__value {
-    margin-top: 18px;
-    font-size: 1.02rem;
-    line-height: 1.65;
-  }
-
   .hero-surface {
     position: relative;
-    min-height: 420px;
-    border: 1px solid var(--border-subtle);
-    border-radius: 34px;
-    background:
-      radial-gradient(circle at 20% 10%, rgba(61, 210, 255, 0.14), transparent 28%),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0)),
-      rgba(10, 18, 27, 0.92);
-    box-shadow: var(--shadow-panel);
-    overflow: hidden;
-  }
-
-  .hero-surface::before,
-  .hero-surface::after {
-    content: "";
-    position: absolute;
-    pointer-events: none;
+    width: 100%;
+    max-width: 344px;
+    margin-left: auto;
+    margin-top: 8px;
   }
 
   .hero-surface::before {
-    inset: 0;
-    background-image:
-      linear-gradient(to right, transparent 0, transparent calc(100% - 1px), rgba(148, 163, 184, 0.1) calc(100% - 1px)),
-      linear-gradient(to bottom, transparent 0, transparent calc(100% - 1px), rgba(148, 163, 184, 0.1) calc(100% - 1px));
-    background-size: 64px 64px;
-    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 92%);
-  }
-
-  .hero-surface::after {
-    inset: 22px;
-    border-radius: 24px;
-    border: 1px solid rgba(148, 163, 184, 0.12);
-  }
-
-  .hero-surface__chrome {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 16px 20px;
-    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
-    background: rgba(255, 255, 255, 0.015);
-  }
-
-  .hero-surface__lights {
-    display: inline-flex;
-    gap: 8px;
-  }
-
-  .hero-surface__lights span {
-    width: 9px;
-    height: 9px;
+    content: "";
+    position: absolute;
+    inset: auto auto 12% -10%;
+    width: 160px;
+    height: 160px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.16);
+    background: rgba(61, 210, 255, 0.12);
+    filter: blur(72px);
+    pointer-events: none;
   }
 
-  .hero-surface__lights span:first-child {
-    background: rgba(255, 128, 128, 0.6);
-  }
-
-  .hero-surface__lights span:nth-child(2) {
-    background: rgba(255, 208, 128, 0.6);
-  }
-
-  .hero-surface__lights span:last-child {
-    background: rgba(82, 255, 179, 0.68);
-  }
-
-  .hero-surface__title {
-    margin: 0;
-    color: var(--color-muted);
-    font-size: 0.82rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  .hero-surface__grid {
+  .hero-surface__card {
     position: relative;
     z-index: 1;
-    display: grid;
-    gap: 14px;
-    padding: 18px;
-    grid-template-columns: 1.2fr 0.8fr;
-    grid-template-rows: minmax(160px, auto) minmax(160px, auto);
+    padding: 26px 24px;
+    border-radius: 30px;
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    background:
+      linear-gradient(180deg, rgba(61, 210, 255, 0.04), rgba(61, 210, 255, 0)),
+      linear-gradient(180deg, rgba(14, 24, 35, 0.9), rgba(8, 16, 25, 0.86));
+    box-shadow: var(--shadow-panel);
+    backdrop-filter: blur(14px);
   }
 
-  .hero-surface__panel {
-    padding: 18px;
-    border-radius: 22px;
-    border: 1px solid rgba(148, 163, 184, 0.14);
-    background: rgba(10, 18, 27, 0.68);
-    backdrop-filter: blur(8px);
-  }
-
-  .hero-surface__panel--pipeline {
-    grid-row: span 2;
-  }
-
-  .hero-surface__label {
+  .hero-surface__eyebrow,
+  .hero-surface__row-label {
     display: inline-flex;
-    margin-bottom: 14px;
     color: var(--color-accent);
     font-size: 0.72rem;
     letter-spacing: 0.14em;
-    text-transform: uppercase;
   }
 
-  .hero-surface__headline {
+  .hero-surface__title,
+  .hero-surface__summary,
+  .hero-surface__row-value {
     margin: 0;
-    max-width: 14ch;
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
-    line-height: 1.08;
   }
 
-  .hero-surface__rail {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 22px;
+  .hero-surface__title {
+    margin-top: 18px;
+    font-size: 1.48rem;
+    line-height: 1.16;
   }
 
-  .hero-surface__chip {
-    display: inline-flex;
-    align-items: center;
-    min-height: 34px;
-    padding: 0 12px;
-    border-radius: 999px;
-    border: 1px solid rgba(61, 210, 255, 0.16);
-    background: rgba(61, 210, 255, 0.06);
-    color: var(--color-text);
-    font-size: 0.82rem;
-  }
-
-  .hero-surface__matrix {
-    display: grid;
-    gap: 10px;
-  }
-
-  .hero-surface__module {
-    display: block;
-    padding: 12px 14px;
-    border-radius: 16px;
-    border: 1px solid rgba(148, 163, 184, 0.12);
+  .hero-surface__summary {
+    margin-top: 12px;
     color: var(--color-muted);
-    background: rgba(255, 255, 255, 0.02);
+    font-size: 0.95rem;
+    line-height: 1.76;
   }
 
-  .hero-surface__terminal {
+  .hero-surface__rows {
     display: grid;
-    gap: 10px;
+    gap: 16px;
+    margin-top: 24px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(148, 163, 184, 0.12);
   }
 
-  .hero-surface__terminal-line {
-    margin: 0;
+  .hero-surface__row {
+    display: grid;
+    gap: 7px;
+  }
+
+  .hero-surface__row-label {
     color: var(--color-muted);
-    font-family:
-      "IBM Plex Mono",
-      "SFMono-Regular",
-      "Menlo",
-      monospace;
-    font-size: 0.88rem;
   }
 
-  .hero-surface__terminal-line::before {
-    content: "> ";
-    color: var(--color-accent);
+  .hero-surface__row-value {
+    font-size: 0.92rem;
+    line-height: 1.68;
   }
 
   @media (min-width: 960px) {
     .hero-section {
-      grid-template-columns: minmax(0, 1.04fr) minmax(340px, 0.96fr);
+      grid-template-columns: minmax(0, 1.34fr) minmax(280px, 0.66fr);
     }
   }
 
   @media (max-width: 959px) {
-    .hero-surface__grid {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto;
+    .hero-section {
+      gap: 28px;
+      padding-top: 52px;
+      padding-bottom: 56px;
     }
 
-    .hero-surface__panel--pipeline {
-      grid-row: auto;
+    .hero-copy {
+      max-width: 100%;
+    }
+
+    .hero-surface {
+      max-width: 100%;
+      margin-top: 8px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    h1 {
+      width: auto;
+      font-size: clamp(2.55rem, 12vw, 3.45rem);
+      line-height: 1.04;
+    }
+
+    h1 span {
+      white-space: normal;
+    }
+
+    .hero-description,
+    .hero-supporting {
+      max-width: 100%;
+      font-size: 0.98rem;
+    }
+
+    .hero-surface__card {
+      padding: 24px 22px;
+    }
+
+    .hero-actions {
+      gap: 12px;
+    }
+
+    .hero-action {
+      width: 100%;
     }
   }
 </style>

@@ -15,27 +15,41 @@ const stepNotes: Record<string, string> = {
 };
 
 const stepTags: Record<string, string> = {
-  问题定义: "scope",
-  假设提出: "hypothesis",
-  数据构建: "data",
-  实验验证: "validation",
-  结果审查: "review",
-  持续迭代: "iteration",
+  问题定义: "界定",
+  假设提出: "假设",
+  数据构建: "数据",
+  实验验证: "验证",
+  结果审查: "审查",
+  持续迭代: "迭代",
 };
 
 const { title, description, steps } = Astro.props;
+
+const titleLines = (() => {
+  const marker = "，而是";
+  if (!title.includes(marker)) return [title];
+
+  const [lead, tail] = title.split(marker);
+  return [lead, `而是${tail}`];
+})();
 ---
 
 <section class="section-block methodology-section" id="methodology">
   <div class="methodology-layout">
     <div class="section-heading methodology-rail">
-      <p class="section-kicker">Methodology</p>
-      <h2>{title}</h2>
-      <p class="section-description">{description}</p>
+      <div class="methodology-rail__copy">
+        <p class="section-kicker">研究方法</p>
+        <h2>
+          {titleLines.map((line) => (
+            <span>{line}</span>
+          ))}
+        </h2>
+        <p class="section-description">{description}</p>
+      </div>
       <div class="methodology-rail__legend">
-        <span>Research Loop</span>
-        <span>Structured Review</span>
-        <span>System-first</span>
+        <span>研究闭环</span>
+        <span>结构化审查</span>
+        <span>系统优先</span>
       </div>
     </div>
     <ol class="methodology-grid">
@@ -62,17 +76,25 @@ const { title, description, steps } = Astro.props;
 
   .methodology-layout {
     display: grid;
-    gap: 20px;
+    gap: 22px;
   }
 
   .methodology-rail {
-    padding: 22px;
+    display: grid;
+    gap: 26px;
+    padding: 24px;
     border: 1px solid var(--border-subtle);
     border-radius: 28px;
     background:
       linear-gradient(180deg, rgba(61, 210, 255, 0.04), rgba(61, 210, 255, 0)),
       var(--color-panel-soft);
     box-shadow: var(--shadow-glow);
+  }
+
+  .methodology-rail__copy {
+    display: grid;
+    gap: 18px;
+    align-content: start;
   }
 
   .section-kicker {
@@ -84,14 +106,22 @@ const { title, description, steps } = Astro.props;
   }
 
   h2 {
+    display: grid;
+    gap: 0.2em;
     margin: 0;
-    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    max-width: 11ch;
+    font-size: clamp(1.68rem, 2.12vw, 2.18rem);
     line-height: 1.1;
+    letter-spacing: -0.035em;
+  }
+
+  h2 span {
+    display: block;
   }
 
   .section-description {
-    margin: 16px 0 0;
-    max-width: 56rem;
+    margin: 0;
+    max-width: 30rem;
     color: var(--color-muted);
     line-height: 1.8;
   }
@@ -100,7 +130,7 @@ const { title, description, steps } = Astro.props;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-top: 22px;
+    margin-top: auto;
   }
 
   .methodology-rail__legend span {
@@ -121,14 +151,15 @@ const { title, description, steps } = Astro.props;
     padding: 0;
     margin: 0;
     display: grid;
-    gap: 14px;
+    gap: 16px;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 
   .methodology-step {
     display: grid;
     gap: 14px;
-    min-height: 180px;
+    min-height: 186px;
+    height: 100%;
     padding: 22px;
     border-radius: 24px;
     background: linear-gradient(180deg, rgba(14, 24, 35, 0.92), rgba(8, 16, 25, 0.86));
@@ -168,13 +199,42 @@ const { title, description, steps } = Astro.props;
 
   @media (min-width: 980px) {
     .methodology-layout {
-      grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.28fr);
-      align-items: start;
+      grid-template-columns: minmax(408px, 0.92fr) minmax(0, 1.08fr);
+      align-items: stretch;
     }
 
     .methodology-rail {
+      min-height: 100%;
+      align-content: space-between;
       position: sticky;
       top: 104px;
+    }
+
+    .methodology-grid {
+      align-content: stretch;
+    }
+
+    h2 span {
+      white-space: nowrap;
+    }
+  }
+
+  @media (min-width: 1180px) {
+    .methodology-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 979px) {
+    h2 {
+      max-width: none;
+      line-height: 1.12;
+    }
+  }
+
+  @media (max-width: 640px) {
+    h2 span {
+      white-space: normal;
     }
   }
 </style>

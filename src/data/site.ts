@@ -4,7 +4,7 @@ export const siteMeta = {
   title: "WinqLab | 量化研究实验室",
   description:
     "WinqLab 专注于量化策略研究、交易系统构建与研究基础设施设计。",
-  heroTitle: "量化研究，从假设到系统化验证。",
+  heroTitle: "从研究假设到系统验证，再到实盘交易",
 };
 
 export const navigationItems = [

@@ -4,18 +4,18 @@ import { notesPage } from "../data/notes";
 import SiteLayout from "../layouts/SiteLayout.astro";
 
 const notesMeta = [
-  { label: "Tracks", value: "Methods / Systems / Experiments" },
-  { label: "State", value: "Growing Public Archive" },
-  { label: "Format", value: "Structured Notes / Design / Summaries" },
+  { label: "轨道", value: "方法 / 系统 / 实验" },
+  { label: "状态", value: "持续整理中的研究记录" },
+  { label: "形式", value: "结构化札记 / 设计 / 摘要" },
 ];
 ---
 
 <SiteLayout title={`WinqLab | ${notesPage.title}`}>
   <PageHero
-    kicker="Notes"
+    kicker="札记"
     title={notesPage.title}
     intro={notesPage.intro}
-    signals={["Public Archive", "Gradual Release", "Context-rich"]}
+    signals={["持续整理", "持续更新", "重视上下文"]}
     meta={notesMeta}
   />
 
@@ -26,7 +26,7 @@ const notesMeta = [
           <span class="page-card__eyebrow">{String(index + 1).padStart(2, "0")}</span>
           <h2 class="page-card__title">{track}</h2>
           <p class="page-card__body">
-            围绕这一轨道的公开记录将逐步发布，重点呈现方法、结构和实验上下文。
+            围绕这一轨道持续整理方法、结构和实验上下文，方便按主题查阅与回看。
           </p>
         </article>
       ))

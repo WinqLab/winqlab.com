@@ -4,18 +4,18 @@ import { contactPage } from "../data/contact";
 import SiteLayout from "../layouts/SiteLayout.astro";
 
 const contactMeta = [
-  { label: "Intent", value: "Research / System / Collaboration Topics" },
-  { label: "Tone", value: "Low-friction / Non-sales" },
-  { label: "Primary", value: "Direct Email" },
+  { label: "主题", value: "研究 / 系统 / 协作议题" },
+  { label: "方式", value: "低摩擦 / 非销售导向" },
+  { label: "主要渠道", value: "直接邮件" },
 ];
 ---
 
 <SiteLayout title={`WinqLab | ${contactPage.title}`}>
   <PageHero
-    kicker="Contact"
+    kicker="联系"
     title={contactPage.title}
     intro={contactPage.statement}
-    signals={["Direct", "Asynchronous", "Research Topics"]}
+    signals={["直接联系", "异步沟通", "研究议题"]}
     meta={contactMeta}
   />
 

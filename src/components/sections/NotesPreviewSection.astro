@@ -11,7 +11,7 @@ const { title, description, tracks } = Astro.props;
 <section class="section-block">
   <div class="notes-layout">
     <div class="section-heading notes-lead">
-      <p class="section-kicker">Notes</p>
+      <p class="section-kicker">研究札记</p>
       <h2>{title}</h2>
       <p class="section-description">{description}</p>
     </div>
@@ -21,7 +21,7 @@ const { title, description, tracks } = Astro.props;
           <article class="note-card">
             <span class="note-card__index">{String(index + 1).padStart(2, "0")}</span>
             <p class="note-card__label">{track}</p>
-            <p class="note-card__hint">内容将结合方法、结构与实验逐步公开。</p>
+            <p class="note-card__hint">内容会围绕方法、结构与实验持续整理。</p>
           </article>
         ))
       }
