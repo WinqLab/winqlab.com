@@ -1,11 +1,14 @@
 ---
 import { navigationItems, siteMeta } from "../data/site";
+import SiteBrandMark from "./SiteBrandMark.astro";
 ---
 
 <header class="site-header">
   <div class="site-header__inner">
     <a class="site-brand" href="/">
-      <span class="site-brand__mark" aria-hidden="true"></span>
+      <span class="site-brand__mark" aria-hidden="true">
+        <SiteBrandMark class="site-brand__mark-icon" />
+      </span>
       <span class="site-brand__stack">
         <span class="site-brand__name">{siteMeta.name}</span>
         <span class="site-brand__meta">量化研究与交易系统</span>

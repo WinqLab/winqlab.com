@@ -1,12 +1,18 @@
 ---
 import { siteMeta } from "../data/site";
+import SiteBrandMark from "./SiteBrandMark.astro";
 ---
 
 <footer class="site-footer">
   <div class="site-footer__inner">
-    <div class="site-footer__cluster">
-      <p class="site-footer__brand">{siteMeta.name}</p>
-      <p class="site-footer__tag">量化研究与交易系统概览</p>
+    <div class="site-brand">
+      <span class="site-brand__mark" aria-hidden="true">
+        <SiteBrandMark class="site-brand__mark-icon" />
+      </span>
+      <div class="site-brand__stack">
+        <p class="site-brand__name">{siteMeta.name}</p>
+        <p class="site-brand__meta">量化研究与交易系统</p>
+      </div>
     </div>
     <p class="site-footer__copy">
       量化研究、交易系统与研究基础设施的整体概览
