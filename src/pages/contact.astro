@@ -1,0 +1,70 @@
+---
+import { contactPage } from "../data/contact";
+import SiteLayout from "../layouts/SiteLayout.astro";
+---
+
+<SiteLayout title={`WinqLab | ${contactPage.title}`}>
+  <section class="content-hero">
+    <p class="content-kicker">Contact</p>
+    <h1>{contactPage.title}</h1>
+    <p class="content-intro">{contactPage.statement}</p>
+  </section>
+
+  <section class="contact-card">
+    <p class="contact-card__label">{contactPage.primaryLabel}</p>
+    <a class="contact-card__value" href={`mailto:${contactPage.primaryValue}`}>
+      {contactPage.primaryValue}
+    </a>
+  </section>
+</SiteLayout>
+
+<style>
+  .content-hero {
+    padding: 80px 0 32px;
+  }
+
+  .content-kicker {
+    margin: 0 0 8px;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.74rem;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.6rem, 5vw, 4.4rem);
+    line-height: 1.02;
+  }
+
+  .content-intro {
+    margin: 20px 0 0;
+    max-width: 48rem;
+    color: var(--color-muted);
+    line-height: 1.8;
+  }
+
+  .contact-card {
+    max-width: 520px;
+    padding: 24px;
+    border-radius: 24px;
+    border: 1px solid var(--border-subtle);
+    background: var(--color-panel);
+  }
+
+  .contact-card__label,
+  .contact-card__value {
+    margin: 0;
+  }
+
+  .contact-card__label {
+    color: var(--color-muted);
+    font-size: 0.92rem;
+  }
+
+  .contact-card__value {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 1.2rem;
+  }
+</style>

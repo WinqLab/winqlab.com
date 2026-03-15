@@ -1,0 +1,21 @@
+---
+import CapabilityGrid from "../components/sections/CapabilityGrid.astro";
+import ContactCloseSection from "../components/sections/ContactCloseSection.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
+import MethodologySection from "../components/sections/MethodologySection.astro";
+import NotesPreviewSection from "../components/sections/NotesPreviewSection.astro";
+import ResearchThemesSection from "../components/sections/ResearchThemesSection.astro";
+import SystemFlowSection from "../components/sections/SystemFlowSection.astro";
+import { homePage } from "../data/home";
+import SiteLayout from "../layouts/SiteLayout.astro";
+---
+
+<SiteLayout>
+  <HeroSection {...homePage.hero} />
+  <CapabilityGrid items={homePage.capabilities} />
+  <MethodologySection {...homePage.methodology} />
+  <ResearchThemesSection items={homePage.researchThemes} />
+  <SystemFlowSection items={homePage.systemFlow} />
+  <NotesPreviewSection {...homePage.notes} />
+  <ContactCloseSection {...homePage.contact} />
+</SiteLayout>

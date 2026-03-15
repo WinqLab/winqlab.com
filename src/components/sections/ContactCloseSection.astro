@@ -1,0 +1,54 @@
+---
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<section class="contact-close">
+  <div>
+    <p class="contact-close__kicker">Contact</p>
+    <h2>{title}</h2>
+  </div>
+  <p class="contact-close__description">{description}</p>
+</section>
+
+<style>
+  .contact-close {
+    margin: 36px 0 12px;
+    padding: 28px 0 0;
+    border-top: 1px solid var(--border-subtle);
+    display: grid;
+    gap: 16px;
+  }
+
+  .contact-close__kicker {
+    margin: 0 0 8px;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.74rem;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    line-height: 1.1;
+  }
+
+  .contact-close__description {
+    margin: 0;
+    max-width: 44rem;
+    color: var(--color-muted);
+    line-height: 1.8;
+  }
+
+  @media (min-width: 900px) {
+    .contact-close {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      align-items: start;
+    }
+  }
+</style>

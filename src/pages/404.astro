@@ -1,0 +1,55 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+---
+
+<SiteLayout title="WinqLab | 页面未找到">
+  <section class="not-found">
+    <p class="not-found__kicker">404</p>
+    <h1>页面未找到</h1>
+    <p class="not-found__description">
+      你访问的页面不存在，或者仍在整理中。
+    </p>
+    <a class="not-found__link" href="/">返回首页</a>
+  </section>
+</SiteLayout>
+
+<style>
+  .not-found {
+    padding: 120px 0;
+    display: grid;
+    gap: 18px;
+  }
+
+  .not-found__kicker {
+    margin: 0;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.74rem;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.8rem, 5vw, 4.6rem);
+    line-height: 1;
+  }
+
+  .not-found__description {
+    margin: 0;
+    max-width: 36rem;
+    color: var(--color-muted);
+    line-height: 1.8;
+  }
+
+  .not-found__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 48px;
+    padding: 0 22px;
+    border-radius: 999px;
+    border: 1px solid rgba(61, 210, 255, 0.4);
+    background: linear-gradient(135deg, var(--color-accent-soft), rgba(61, 210, 255, 0.08));
+  }
+</style>

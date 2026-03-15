@@ -1,0 +1,18 @@
+---
+import { navigationItems, siteMeta } from "../data/site";
+---
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-brand" href="/">{siteMeta.name}</a>
+    <nav aria-label="Primary" class="site-nav">
+      {
+        navigationItems.map((item) => (
+          <a href={item.href} class="site-nav__link">
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>

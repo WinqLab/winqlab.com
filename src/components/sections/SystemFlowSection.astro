@@ -1,0 +1,98 @@
+---
+interface Props {
+  items: string[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="section-block" id="system-flow">
+  <div class="section-heading">
+    <p class="section-kicker">System Flow</p>
+    <h2>把研究组织成一条连续运转的系统链路</h2>
+    <p class="section-description">
+      从市场数据到策略实验，再到执行与监控，WinqLab 将量化研究视为一条连续运转的系统链路。
+    </p>
+  </div>
+  <div class="system-flow">
+    {
+      items.map((item, index) => (
+        <>
+          <article class="system-node">
+            <span class="system-node__index">{String(index + 1).padStart(2, "0")}</span>
+            <p class="system-node__label">{item}</p>
+          </article>
+          {index < items.length - 1 && <span class="system-flow__arrow">→</span>}
+        </>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .section-block {
+    padding: 36px 0;
+  }
+
+  .section-heading {
+    margin-bottom: 24px;
+  }
+
+  .section-kicker {
+    margin: 0 0 8px;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.74rem;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    line-height: 1.1;
+  }
+
+  .section-description {
+    margin: 16px 0 0;
+    max-width: 56rem;
+    color: var(--color-muted);
+    line-height: 1.8;
+  }
+
+  .system-flow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .system-node {
+    min-width: 150px;
+    flex: 1 1 150px;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid var(--border-subtle);
+    background: var(--color-panel);
+  }
+
+  .system-node__index,
+  .system-node__label {
+    margin: 0;
+  }
+
+  .system-node__index {
+    display: inline-block;
+    color: var(--color-accent);
+    font-size: 0.74rem;
+    letter-spacing: 0.14em;
+    margin-bottom: 14px;
+  }
+
+  .system-node__label {
+    line-height: 1.55;
+  }
+
+  .system-flow__arrow {
+    color: var(--color-muted);
+  }
+</style>

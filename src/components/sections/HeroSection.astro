@@ -1,0 +1,196 @@
+---
+interface Action {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  supporting: string;
+  actions: Action[];
+}
+
+const { title, description, supporting, actions } = Astro.props;
+---
+
+<section class="hero-section">
+  <div class="hero-copy">
+    <p class="hero-kicker">Quant Research Lab</p>
+    <h1>{title}</h1>
+    <p class="hero-description">{description}</p>
+    <p class="hero-supporting">{supporting}</p>
+    <div class="hero-actions">
+      {
+        actions.map((action, index) => (
+          <a
+            href={action.href}
+            class:list={[
+              "hero-action",
+              index === 0 ? "hero-action--primary" : "hero-action--secondary",
+            ]}
+          >
+            {action.label}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+  <div class="hero-visual" aria-hidden="true">
+    <div class="hero-orbit hero-orbit--outer"></div>
+    <div class="hero-orbit hero-orbit--inner"></div>
+    <span class="hero-node hero-node--a"></span>
+    <span class="hero-node hero-node--b"></span>
+    <span class="hero-node hero-node--c"></span>
+    <span class="hero-node hero-node--d"></span>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    padding: 80px 0 64px;
+    display: grid;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .hero-kicker {
+    margin: 0 0 20px;
+    color: var(--color-accent);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+  }
+
+  h1 {
+    margin: 0;
+    max-width: 12ch;
+    font-size: clamp(2.8rem, 7vw, 5.6rem);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+  }
+
+  .hero-description,
+  .hero-supporting {
+    max-width: 52rem;
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  .hero-description {
+    margin: 24px 0 0;
+    color: var(--color-text);
+  }
+
+  .hero-supporting {
+    margin: 12px 0 0;
+    color: var(--color-muted);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 28px;
+  }
+
+  .hero-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 22px;
+    border-radius: 999px;
+    border: 1px solid var(--border-subtle);
+    transition:
+      transform 180ms ease,
+      border-color 180ms ease,
+      background-color 180ms ease;
+  }
+
+  .hero-action:hover,
+  .hero-action:focus-visible {
+    transform: translateY(-1px);
+  }
+
+  .hero-action--primary {
+    background: linear-gradient(135deg, var(--color-accent-soft), rgba(61, 210, 255, 0.08));
+    border-color: rgba(61, 210, 255, 0.4);
+  }
+
+  .hero-action--secondary {
+    color: var(--color-muted);
+  }
+
+  .hero-visual {
+    position: relative;
+    height: min(54vw, 440px);
+    min-height: 300px;
+    border: 1px solid var(--border-subtle);
+    border-radius: 32px;
+    background:
+      radial-gradient(circle at center, rgba(61, 210, 255, 0.1), transparent 44%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
+    box-shadow: var(--shadow-panel);
+    overflow: hidden;
+  }
+
+  .hero-visual::before,
+  .hero-visual::after {
+    content: "";
+    position: absolute;
+    inset: 18px;
+    border-radius: 24px;
+    border: 1px solid rgba(148, 163, 184, 0.12);
+  }
+
+  .hero-visual::after {
+    inset: 36px;
+  }
+
+  .hero-orbit {
+    position: absolute;
+    border: 1px solid rgba(61, 210, 255, 0.2);
+    border-radius: 999px;
+    inset: 14%;
+  }
+
+  .hero-orbit--inner {
+    inset: 28%;
+  }
+
+  .hero-node {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 999px;
+    background: var(--color-accent);
+    box-shadow: 0 0 0 8px rgba(61, 210, 255, 0.12);
+  }
+
+  .hero-node--a {
+    top: 18%;
+    left: 24%;
+  }
+
+  .hero-node--b {
+    top: 26%;
+    right: 18%;
+  }
+
+  .hero-node--c {
+    bottom: 22%;
+    left: 18%;
+  }
+
+  .hero-node--d {
+    right: 28%;
+    bottom: 18%;
+  }
+
+  @media (min-width: 960px) {
+    .hero-section {
+      grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+    }
+  }
+</style>

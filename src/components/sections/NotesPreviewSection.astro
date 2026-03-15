@@ -1,0 +1,88 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  tracks: string[];
+}
+
+const { title, description, tracks } = Astro.props;
+---
+
+<section class="section-block">
+  <div class="section-heading">
+    <p class="section-kicker">Notes</p>
+    <h2>{title}</h2>
+    <p class="section-description">{description}</p>
+  </div>
+  <div class="notes-grid">
+    {
+      tracks.map((track) => (
+        <article class="note-card">
+          <p class="note-card__label">{track}</p>
+          <p class="note-card__hint">内容将结合方法、结构与实验逐步公开。</p>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .section-block {
+    padding: 36px 0;
+  }
+
+  .section-heading {
+    margin-bottom: 24px;
+  }
+
+  .section-kicker {
+    margin: 0 0 8px;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.74rem;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    line-height: 1.1;
+  }
+
+  .section-description {
+    margin: 16px 0 0;
+    max-width: 56rem;
+    color: var(--color-muted);
+    line-height: 1.8;
+  }
+
+  .notes-grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .note-card {
+    min-height: 180px;
+    padding: 24px;
+    border-radius: 24px;
+    border: 1px solid var(--border-subtle);
+    background: linear-gradient(180deg, rgba(61, 210, 255, 0.05), rgba(61, 210, 255, 0));
+  }
+
+  .note-card__label,
+  .note-card__hint {
+    margin: 0;
+  }
+
+  .note-card__label {
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+
+  .note-card__hint {
+    margin-top: 12px;
+    color: var(--color-muted);
+    line-height: 1.75;
+  }
+</style>
