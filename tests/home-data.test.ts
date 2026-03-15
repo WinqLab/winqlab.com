@@ -3,7 +3,8 @@ import { homePage } from "../src/data/home";
 
 describe("homepage content model", () => {
   it("contains the approved hero, capability, methodology, and system copy", () => {
-    expect(homePage.hero.title).toBe("量化研究，从假设到系统化验证。");
+    expect(homePage.hero.title).toBe("从研究假设到系统验证，再到实盘交易");
+    expect(homePage.hero.supporting).toContain("实盘交易");
     expect(homePage.hero.actions.map((item) => item.label)).toEqual([
       "查看研究框架",
       "浏览系统结构",

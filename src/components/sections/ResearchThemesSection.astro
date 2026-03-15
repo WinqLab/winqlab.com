@@ -4,20 +4,95 @@ interface Props {
 }
 
 const { items } = Astro.props;
+
+const themeProfiles: Record<
+  string,
+  {
+    summary: string;
+    tags: string[];
+    chip: string;
+    line: string;
+    glow: string;
+  }
+> = {
+  "趋势与动量类策略研究": {
+    summary:
+      "围绕趋势延续、节奏变化与持仓管理展开验证，观察不同市场阶段下信号是否具备持续性与一致性。",
+    tags: ["趋势识别", "仓位节奏"],
+    chip: "持续跟踪",
+    line: "rgba(61, 210, 255, 0.42)",
+    glow: "rgba(61, 210, 255, 0.16)",
+  },
+  "横截面与因子信号探索": {
+    summary:
+      "在横向比较与特征组合中筛选更有解释力的信号，并持续检查其稳健性、迁移性与衰减节奏。",
+    tags: ["信号筛选", "稳健检验"],
+    chip: "重点推进",
+    line: "rgba(125, 211, 252, 0.4)",
+    glow: "rgba(125, 211, 252, 0.14)",
+  },
+  "组合构建与风险约束设计": {
+    summary:
+      "把研究信号转成可执行组合，持续平衡权重分配、暴露控制与回撤约束之间的关系。",
+    tags: ["权重分配", "风险约束"],
+    chip: "组合设计",
+    line: "rgba(103, 232, 249, 0.38)",
+    glow: "rgba(103, 232, 249, 0.12)",
+  },
+  "执行效率与交易系统优化": {
+    summary:
+      "从指令生成、链路延迟到成交反馈持续压缩损耗，提升研究结果向实盘交易的传递效率。",
+    tags: ["执行链路", "反馈闭环"],
+    chip: "系统优化",
+    line: "rgba(96, 165, 250, 0.4)",
+    glow: "rgba(96, 165, 250, 0.13)",
+  },
+};
 ---
 
 <section class="section-block">
   <div class="section-heading">
-    <p class="section-kicker">Themes</p>
+    <p class="section-kicker">研究主题</p>
     <h2>当前关注的研究方向</h2>
+    <p class="section-description">
+      围绕可验证、可执行与可复用的研究路径，当前重点保持在信号发现、组合构建与交易落地相关的四类方向上。
+    </p>
+    <div class="section-highlights">
+      <span>假设驱动</span>
+      <span>结构审查</span>
+      <span>可执行落地</span>
+    </div>
   </div>
   <div class="themes-grid">
     {
-      items.map((item) => (
-        <article class="theme-card">
-          <p>{item}</p>
-        </article>
-      ))
+      items.map((item, index) => {
+        const profile = themeProfiles[item] ?? {
+          summary: "围绕研究问题持续跟踪、验证与迭代。",
+          tags: ["持续研究", "结构优化"],
+          chip: "持续更新",
+          line: "rgba(61, 210, 255, 0.4)",
+          glow: "rgba(61, 210, 255, 0.14)",
+        };
+
+        return (
+          <article
+            class="theme-card"
+            style={`--theme-line: ${profile.line}; --theme-glow: ${profile.glow};`}
+          >
+            <div class="theme-card__meta">
+              <span class="theme-card__index">方向 {String(index + 1).padStart(2, "0")}</span>
+              <span class="theme-card__chip">{profile.chip}</span>
+            </div>
+            <div class="theme-card__body">
+              <h3>{item}</h3>
+              <p>{profile.summary}</p>
+            </div>
+            <ul class="theme-card__tags" aria-label={`${item}关注点`}>
+              {profile.tags.map((tag) => <li>{tag}</li>)}
+            </ul>
+          </article>
+        );
+      })
     }
   </div>
 </section>
@@ -45,27 +120,160 @@ const { items } = Astro.props;
     line-height: 1.1;
   }
 
+  .section-description {
+    margin: 16px 0 0;
+    max-width: 58rem;
+    color: var(--color-muted);
+    line-height: 1.8;
+  }
+
+  .section-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .section-highlights span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 0 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    color: var(--color-muted);
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
   .themes-grid {
     display: grid;
-    gap: 16px;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   }
 
   .theme-card {
-    min-height: 180px;
-    display: flex;
-    align-items: flex-end;
+    position: relative;
+    overflow: hidden;
+    min-height: 248px;
+    display: grid;
+    gap: 24px;
+    align-content: space-between;
     padding: 24px;
-    border-radius: 24px;
+    border-radius: 28px;
     border: 1px solid var(--border-subtle);
     background:
-      linear-gradient(180deg, rgba(61, 210, 255, 0.03), rgba(61, 210, 255, 0)),
+      linear-gradient(180deg, rgba(61, 210, 255, 0.08), rgba(61, 210, 255, 0.02) 42%, rgba(61, 210, 255, 0)),
       var(--color-panel-strong);
+    box-shadow: var(--shadow-glow);
+    transition:
+      transform 180ms ease,
+      border-color 180ms ease,
+      background-color 180ms ease;
+  }
+
+  .theme-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--theme-line), transparent);
+  }
+
+  .theme-card::after {
+    content: "";
+    position: absolute;
+    right: -28px;
+    bottom: -36px;
+    width: 140px;
+    height: 140px;
+    border-radius: 999px;
+    background: radial-gradient(circle, var(--theme-glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .theme-card:hover,
+  .theme-card:focus-within {
+    transform: translateY(-2px);
+    border-color: rgba(61, 210, 255, 0.24);
+  }
+
+  .theme-card__meta,
+  .theme-card__body,
+  .theme-card__tags {
+    position: relative;
+    z-index: 1;
+  }
+
+  .theme-card__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .theme-card__index {
+    color: var(--color-accent);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+  }
+
+  .theme-card__chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 0 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    color: var(--color-muted);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .theme-card__body {
+    display: grid;
+    gap: 14px;
+  }
+
+  .theme-card h3 {
+    margin: 0;
+    font-size: 1.18rem;
+    line-height: 1.5;
   }
 
   .theme-card p {
     margin: 0;
-    font-size: 1.04rem;
-    line-height: 1.6;
+    color: var(--color-muted);
+    line-height: 1.75;
+  }
+
+  .theme-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .theme-card__tags li {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 0 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    background: rgba(255, 255, 255, 0.025);
+    color: var(--color-text);
+    font-size: 0.82rem;
+  }
+
+  @media (max-width: 720px) {
+    .theme-card {
+      min-height: 220px;
+      padding: 22px;
+    }
   }
 </style>

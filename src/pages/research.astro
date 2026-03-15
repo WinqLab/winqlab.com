@@ -4,18 +4,18 @@ import { researchPage } from "../data/research";
 import SiteLayout from "../layouts/SiteLayout.astro";
 
 const researchMeta = [
-  { label: "Mode", value: "Research Principles" },
-  { label: "Flow", value: "Question -> Validation -> Iteration" },
-  { label: "Scope", value: "Themes / Process / Future Directions" },
+  { label: "模式", value: "研究原则" },
+  { label: "流程", value: "问题 -> 验证 -> 迭代" },
+  { label: "范围", value: "主题 / 流程 / 后续方向" },
 ];
 ---
 
 <SiteLayout title={`WinqLab | ${researchPage.title}`}>
   <PageHero
-    kicker="Research"
+    kicker="研究"
     title={researchPage.title}
     intro={researchPage.intro}
-    signals={["Process-first", "Peer-facing", "Methodology"]}
+    signals={["过程优先", "面向同行", "方法导向"]}
     meta={researchMeta}
   />
 

@@ -4,19 +4,19 @@ import { systemPage } from "../data/system";
 import SiteLayout from "../layouts/SiteLayout.astro";
 
 const systemMeta = [
-  { label: "Path", value: "Data -> Validation -> Execution -> Monitoring" },
-  { label: "Constraint", value: "Reviewability / Stability / Extensibility" },
-  { label: "Output", value: "Research System Modules" },
+  { label: "路径", value: "数据 -> 验证 -> 执行 -> 监控" },
+  { label: "约束", value: "可审查 / 稳定性 / 可扩展" },
+  { label: "输出", value: "研究系统模块" },
 ];
 ---
 
 <SiteLayout title={`WinqLab | ${systemPage.title}`}>
   <PageHero
-    kicker="System"
+    kicker="系统"
     title={systemPage.title}
     intro={systemPage.intro}
     summary={systemPage.summary}
-    signals={["System View", "Static Interface", "Execution-aware"]}
+    signals={["结构总览", "关键模块", "面向执行"]}
     meta={systemMeta}
   />
 

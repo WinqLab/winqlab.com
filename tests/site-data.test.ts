@@ -5,7 +5,7 @@ describe("site metadata", () => {
   it("uses the approved WinqLab brand and route structure", () => {
     expect(siteMeta.name).toBe("WinqLab");
     expect(siteMeta.siteUrl).toBe("https://winqlab.com");
-    expect(siteMeta.heroTitle).toBe("量化研究，从假设到系统化验证。");
+    expect(siteMeta.heroTitle).toBe("从研究假设到系统验证，再到实盘交易");
     expect(navigationItems.map((item) => item.label)).toEqual([
       "首页",
       "研究",
