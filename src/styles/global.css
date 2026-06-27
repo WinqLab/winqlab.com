@@ -275,12 +275,21 @@ p {
   justify-items: center;
 }
 
+.section-lede--wide {
+  max-width: 920px;
+}
+
 .section-lede p:last-child {
   max-width: 560px;
   margin: 0;
   color: rgba(255, 255, 255, 0.7);
   font-size: 1.08rem;
   line-height: 1.55;
+}
+
+.section-lede--wide p:last-child {
+  max-width: 920px;
+  white-space: nowrap;
 }
 
 .capability-loop {
@@ -702,6 +711,10 @@ p {
   .section-lede--center {
     text-align: left;
     justify-items: start;
+  }
+
+  .section-lede--wide p:last-child {
+    white-space: normal;
   }
 
   .capability-statement p {
