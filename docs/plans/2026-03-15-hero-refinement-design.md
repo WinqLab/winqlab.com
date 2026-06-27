@@ -1,11 +1,11 @@
-# WinQ Hero Refinement Design
+# WinQ Lab Hero Refinement Design
 
 **Date:** 2026-03-15
 **Status:** Approved
 
 ## Goal
 
-Refine the homepage hero so it feels calmer, more legible, and more aligned with `WinQ` as a research-to-trading brand.
+Refine the homepage hero so it feels calmer, more legible, and more aligned with `WinQ Lab` as a research-to-trading brand.
 
 ## User Feedback
 

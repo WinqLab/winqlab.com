@@ -1,4 +1,4 @@
-# WinQ Hero Density Reduction Design
+# WinQ Lab Hero Density Reduction Design
 
 **Date:** 2026-03-15
 **Status:** Approved

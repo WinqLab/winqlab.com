@@ -1,4 +1,4 @@
-# WinQ Agent Notes
+# WinQ Lab Agent Notes
 
 ## Project Direction
 

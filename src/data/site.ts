@@ -1,9 +1,9 @@
 export const siteMeta = {
-  name: "WinQ",
+  name: "WinQ Lab",
   siteUrl: "https://winqlab.com",
-  title: "WinQ | 量化研究实验室",
+  title: "WinQ Lab | 量化研究实验室",
   description:
-    "WinQ 以数据、研究、执行、复盘与持续迭代组织量化研究系统。",
+    "WinQ Lab 以数据、研究、执行、复盘与持续迭代组织量化研究系统。",
   heroTitle: "从数据到研究，从执行到复盘。",
 };
 
