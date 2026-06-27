@@ -9,21 +9,30 @@ import SiteBrandMark from "./SiteBrandMark.astro";
       <span class="site-brand__mark" aria-hidden="true">
         <SiteBrandMark class="site-brand__mark-icon" />
       </span>
-      <span class="site-brand__stack">
-        <span class="site-brand__name">{siteMeta.name}</span>
-        <span class="site-brand__meta">量化研究与交易系统</span>
-      </span>
+      <span class="site-brand__name">{siteMeta.name}</span>
     </a>
-    <div class="site-header__rail">
-      <nav aria-label="Primary" class="site-nav">
+    <nav aria-label="Primary" class="site-nav">
+      {
+        navigationItems.map((item) => (
+          <a href={item.href} class="site-nav__link">
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+    <details class="site-mobile-menu">
+      <summary aria-label="打开导航菜单">
+        <span class="site-header__icon site-header__icon--menu" aria-hidden="true"></span>
+      </summary>
+      <nav aria-label="Mobile primary" class="site-mobile-menu__panel">
         {
           navigationItems.map((item) => (
-            <a href={item.href} class="site-nav__link">
+            <a href={item.href} class="site-mobile-menu__link">
               {item.label}
             </a>
           ))
         }
       </nav>
-    </div>
+    </details>
   </div>
 </header>

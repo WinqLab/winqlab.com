@@ -1,8 +1,8 @@
-# WinqLab Website Implementation Plan
+# WinQ Website Implementation Plan
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
-**Goal:** Build the first public `WinqLab` website as a polished Chinese-language quant research lab brand site, optimized for static deployment on `GitHub Pages`.
+**Goal:** Build the first public `WinQ` website as a polished Chinese-language quant research lab brand site, optimized for static deployment on `GitHub Pages`.
 
 **Architecture:** Use a static-first `Astro` site with content stored in local TypeScript data files under `src/data`. Compose the site from reusable `.astro` layout and section components so the homepage and supporting pages share one visual system, remain easy to extend, and can later grow into notes or topic pages without rewriting the foundation.
 
@@ -136,8 +136,8 @@ import { describe, expect, it } from "vitest";
 import { navigationItems, siteMeta } from "../src/data/site";
 
 describe("site metadata", () => {
-  it("uses the approved WinqLab brand and route structure", () => {
-    expect(siteMeta.name).toBe("WinqLab");
+  it("uses the approved WinQ brand and route structure", () => {
+    expect(siteMeta.name).toBe("WinQ");
     expect(siteMeta.siteUrl).toBe("https://winqlab.com");
     expect(siteMeta.heroTitle).toBe("量化研究，从假设到系统化验证。");
     expect(navigationItems.map((item) => item.label)).toEqual([
@@ -176,11 +176,11 @@ Create `src/data/site.ts`:
 
 ```ts
 export const siteMeta = {
-  name: "WinqLab",
+  name: "WinQ",
   siteUrl: "https://winqlab.com",
-  title: "WinqLab | 量化研究实验室",
+  title: "WinQ | 量化研究实验室",
   description:
-    "WinqLab 专注于量化策略研究、交易系统构建与研究基础设施设计。",
+    "WinQ 专注于量化策略研究、交易系统构建与研究基础设施设计。",
   heroTitle: "量化研究，从假设到系统化验证。",
 };
 
@@ -375,7 +375,7 @@ export const homePage = {
   hero: {
     title: "量化研究，从假设到系统化验证。",
     description:
-      "WinqLab 专注于量化策略研究、交易系统构建与研究基础设施设计，以工程化方式组织数据、实验与执行。",
+      "WinQ 专注于量化策略研究、交易系统构建与研究基础设施设计，以工程化方式组织数据、实验与执行。",
     supporting:
       "面向复杂市场问题，建立可迭代、可审查、可扩展的研究系统。",
     actions: [

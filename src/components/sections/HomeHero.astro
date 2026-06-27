@@ -1,0 +1,19 @@
+---
+import { capabilityLoop } from "../../data/capabilities";
+---
+
+<section class="home-hero section-scene section-scene--light">
+  <div class="section-inner home-hero__inner">
+    <p class="eyebrow">Quant Research Lab</p>
+    <h1>
+      <span>从数据到研究，</span>
+      <span>从执行到复盘。</span>
+    </h1>
+    <p class="home-hero__summary">
+      WinQ 用五个连续能力组织量化研究系统：让数据可被信任，让研究可被验证，让执行接受真实约束，让复盘回到下一轮迭代。
+    </p>
+    <div class="home-hero__actions" aria-label="核心能力">
+      {capabilityLoop.map((item) => <span>{item}</span>)}
+    </div>
+  </div>
+</section>

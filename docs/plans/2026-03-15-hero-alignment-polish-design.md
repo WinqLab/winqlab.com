@@ -1,4 +1,4 @@
-# WinqLab Hero Alignment Polish Design
+# WinQ Hero Alignment Polish Design
 
 **Date:** 2026-03-15
 **Status:** Approved

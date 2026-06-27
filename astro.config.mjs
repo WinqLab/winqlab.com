@@ -8,6 +8,9 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: "https://winqlab.com",
+  devToolbar: {
+    enabled: false,
+  },
   vite: {
     plugins: [tailwindcss()]
   },

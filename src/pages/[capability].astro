@@ -1,0 +1,27 @@
+---
+import CapabilityPage from "../components/CapabilityPage.astro";
+import { capabilities, getCapabilityBySlug } from "../data/capabilities";
+import { siteMeta } from "../data/site";
+import SiteLayout from "../layouts/SiteLayout.astro";
+
+export function getStaticPaths() {
+  return capabilities.map((capability) => ({
+    params: { capability: capability.slug },
+    props: { capability },
+  }));
+}
+
+const slug = Astro.params.capability ?? "";
+const capability = Astro.props.capability ?? getCapabilityBySlug(slug);
+
+if (!capability) {
+  return Astro.redirect("/404");
+}
+
+const title = `${capability.title} | ${siteMeta.name}`;
+const description = capability.summary;
+---
+
+<SiteLayout title={title} description={description}>
+  <CapabilityPage capability={capability} />
+</SiteLayout>

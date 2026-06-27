@@ -1,16 +1,17 @@
 export const siteMeta = {
-  name: "WinqLab",
+  name: "WinQ",
   siteUrl: "https://winqlab.com",
-  title: "WinqLab | 量化研究实验室",
+  title: "WinQ | 量化研究实验室",
   description:
-    "WinqLab 专注于量化策略研究、交易系统构建与研究基础设施设计。",
-  heroTitle: "从研究假设到系统验证，再到实盘交易",
+    "WinQ 以数据、研究、执行、复盘与持续迭代组织量化研究系统。",
+  heroTitle: "从数据到研究，从执行到复盘。",
 };
 
 export const navigationItems = [
   { label: "首页", href: "/" },
+  { label: "数据", href: "/data" },
   { label: "研究", href: "/research" },
-  { label: "系统", href: "/system" },
-  { label: "札记", href: "/notes" },
-  { label: "联系", href: "/contact" },
+  { label: "执行", href: "/execution" },
+  { label: "复盘", href: "/review" },
+  { label: "持续迭代", href: "/iteration" },
 ];

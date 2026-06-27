@@ -1,0 +1,40 @@
+---
+import type { Capability } from "../data/capabilities";
+
+interface Props {
+  capability: Capability;
+}
+
+const { capability } = Astro.props;
+---
+
+<article>
+  <section class="section-scene section-scene--light capability-page-hero">
+    <div class="section-inner capability-page-hero__inner">
+      <p class="eyebrow">{capability.order}</p>
+      <h1>{capability.title}</h1>
+      <p class="capability-page-hero__subtitle">{capability.subtitle}</p>
+      <p class="capability-page-hero__summary">{capability.summary}</p>
+    </div>
+  </section>
+
+  <section class="section-scene section-scene--dark">
+    <div class="section-inner capability-statement">
+      <p>{capability.statement}</p>
+    </div>
+  </section>
+
+  <section class="section-scene section-scene--white">
+    <div class="section-inner capability-detail-grid">
+      {
+        capability.details.map((detail, index) => (
+          <section class="detail-card">
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <h2>{detail.title}</h2>
+            <p>{detail.body}</p>
+          </section>
+        ))
+      }
+    </div>
+  </section>
+</article>

@@ -1,21 +1,21 @@
-# WinqLab Website Design
+# WinQ Website Design
 
 **Date:** 2026-03-15
 **Status:** Approved
 
 ## Summary
 
-`WinqLab` will be a Chinese-language brand website for a quant research lab. It should feel like a modern technology product while communicating the discipline, structure, and credibility of a research system. The site is not a lead-generation funnel, a performance marketing page, or a personal homepage.
+`WinQ` will be a Chinese-language brand website for a quant research lab. It should feel like a modern technology product while communicating the discipline, structure, and credibility of a research system. The site is not a lead-generation funnel, a performance marketing page, or a personal homepage.
 
 The website's job is to answer three questions quickly:
 
-1. What is `WinqLab` researching?
-2. How does `WinqLab` turn ideas into structured research and systems?
-3. Why should peers and potential partners take `WinqLab` seriously?
+1. What is `WinQ` researching?
+2. How does `WinQ` turn ideas into structured research and systems?
+3. Why should peers and potential partners take `WinQ` seriously?
 
 ## Goals
 
-1. Establish `WinqLab` as a clear and memorable quant research brand.
+1. Establish `WinQ` as a clear and memorable quant research brand.
 2. Show a structured view of research, data, validation, execution, and infrastructure.
 3. Communicate professionalism without exposing returns or sensitive strategy details.
 4. Create a foundation that can later grow into a notes-driven research site.
@@ -43,13 +43,13 @@ Secondary audience:
 
 Preferred brand framing:
 
-1. `WinqLab` is a quant research lab.
+1. `WinQ` is a quant research lab.
 2. The brand should not foreground that it is "personal".
 3. The public posture should feel product-like and system-oriented, not sales-driven.
 
 One-line positioning:
 
-`WinqLab is a research lab focused on quant strategy research, trading system design, and research infrastructure.`
+`WinQ is a research lab focused on quant strategy research, trading system design, and research infrastructure.`
 
 Working homepage headline:
 
@@ -57,7 +57,7 @@ Working homepage headline:
 
 Working homepage subheadline:
 
-`WinqLab 专注于量化策略研究、交易系统构建与研究基础设施设计，以工程化方式组织数据、实验与执行。`
+`WinQ 专注于量化策略研究、交易系统构建与研究基础设施设计，以工程化方式组织数据、实验与执行。`
 
 ## Content Boundaries
 
@@ -135,7 +135,7 @@ The top navigation should remain restrained. Avoid any "contact sales" or high-p
 
 Purpose:
 
-1. Explain what `WinqLab` is in a few seconds.
+1. Explain what `WinQ` is in a few seconds.
 2. Establish the system-oriented brand feel immediately.
 
 Content:
@@ -174,7 +174,7 @@ Suggested flow:
 
 Purpose:
 
-1. Show what `WinqLab` studies without oversharing.
+1. Show what `WinQ` studies without oversharing.
 
 Suggested topics:
 
@@ -270,11 +270,11 @@ Methodology section lead:
 
 Methodology section body:
 
-`WinqLab 以问题定义、假设提出、实验验证、结果审查与迭代优化为基础研究路径，强调研究过程的结构化与系统化，而非对短期结果的追逐。`
+`WinQ 以问题定义、假设提出、实验验证、结果审查与迭代优化为基础研究路径，强调研究过程的结构化与系统化，而非对短期结果的追逐。`
 
 System-flow lead:
 
-`从市场数据到策略实验，再到执行与监控，WinqLab 将量化研究视为一条连续运转的系统链路。`
+`从市场数据到策略实验，再到执行与监控，WinQ 将量化研究视为一条连续运转的系统链路。`
 
 Contact line:
 
@@ -319,7 +319,7 @@ Defer until later:
 
 The `V1` site is successful if:
 
-1. A technically literate visitor can understand what `WinqLab` is within one screen.
+1. A technically literate visitor can understand what `WinQ` is within one screen.
 2. The site feels complete and intentional even before a large body of notes exists.
 3. The visual language feels differentiated from generic fund, blog, and SaaS templates.
 4. The content communicates structure and credibility without using performance marketing.

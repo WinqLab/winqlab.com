@@ -1,0 +1,33 @@
+---
+import type { Capability } from "../../data/capabilities";
+
+interface Props {
+  items: Capability[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="section-scene section-scene--dark">
+  <div class="section-inner capability-loop">
+    <div class="section-lede section-lede--center">
+      <p class="eyebrow">System Loop</p>
+      <h2>五个能力。一个闭环。</h2>
+      <p>
+        页面不再堆叠旧内容，只保留系统真正需要解释的五个动作。
+      </p>
+    </div>
+
+    <div class="loop-line" aria-label="WinQ 核心能力闭环">
+      {
+        items.map((item) => (
+          <a class="loop-node" href={`/${item.slug}`}>
+            <span class="loop-node__order">{item.order}</span>
+            <strong>{item.title}</strong>
+            <span>{item.subtitle}</span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
