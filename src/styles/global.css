@@ -224,7 +224,7 @@ p {
 }
 
 .home-hero {
-  min-height: calc(100dvh - 48px);
+  min-height: 76dvh;
   display: grid;
   align-items: center;
   text-align: center;
@@ -234,7 +234,7 @@ p {
   display: grid;
   justify-items: center;
   gap: 24px;
-  padding: 88px 0 72px;
+  padding: 80px 0 64px;
 }
 
 .home-hero__summary {
@@ -296,7 +296,7 @@ p {
 .capability-loop {
   display: grid;
   gap: 56px;
-  padding: 96px 0;
+  padding: 120px 0;
 }
 
 .loop-line {
@@ -343,12 +343,12 @@ p {
 }
 
 .capability-feature {
-  min-height: 78dvh;
+  min-height: 60dvh;
   display: grid;
   grid-template-columns: minmax(0, 0.92fr) minmax(280px, 0.58fr);
   align-items: center;
   gap: 64px;
-  padding: 96px 0;
+  padding: 88px 0;
 }
 
 .capability-feature__copy {
